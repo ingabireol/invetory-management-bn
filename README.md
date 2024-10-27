@@ -1,85 +1,113 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 📦 Inventory Management API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A simple RESTful API for managing products in an inventory system, built using **NestJS** and **PostgreSQL**. This project allows you to add, update, delete, and view products, with a logging feature to track changes.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## 📋 Table of Contents
+- [Project Setup](#-project-setup)
+- [API Endpoints](#-api-endpoints)
+- [Testing Instructions](#-testing-instructions)
+- [Additional Notes](#-additional-notes)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Project setup
+## 🚀 Project Setup
 
-```bash
-$ npm install
-```
+Follow these steps to set up and run the project locally.
 
-## Compile and run the project
+### 1. Clone the Repository
+First, clone the repository to your local machine:
 
-```bash
-# development
-$ npm run start
+git clone <repository-link>
+cd <repository-name>
 
-# watch mode
-$ npm run start:dev
+### 2. Install Dependencies
+Install all required dependencies:
 
-# production mode
-$ npm run start:prod
-```
+npm install
 
-## Run tests
 
-```bash
-# unit tests
-$ npm run test
+### 3. Database Configuration
+Ensure you have PostgreSQL running. Then, set up environment variables for database connection in a .env file:
 
-# e2e tests
-$ npm run test:e2e
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_USERNAME=your-username
+DATABASE_PASSWORD=your-password
+DATABASE_NAME=inventory_db
 
-# test coverage
-$ npm run test:cov
-```
+### 4. Run Migrations
+To set up the necessary tables, run migrations:
 
-## Resources
+npm run typeorm migration:run
 
-Check out a few resources that may come in handy when working with NestJS:
+### 5. Start the Application
+Start the NestJS application:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+npm run start
 
-## Support
+## 📌 API Endpoints
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## ➕ Add New Product
+Endpoint: POST /product
+Description: Adds a new product to the inventory. Each product name must be unique.
+Request Body:
+{
+  "name": "Sample Product",
+  "quantity": 10,
+  "category": "Electronics"
+}
 
-## Stay in touch
+## 🔄 Update Product Quantity
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Endpoint: PATCH /products/:id
+Description: Updates the quantity of an existing product. Quantity must be 0 or greater.
+Request Body:
+{
+  "quantity": 20
+}
 
-## License
+## ❌ Delete Product
+Endpoint: DELETE /product/:id
+Description: Deletes a product by its ID.
+Response: Confirms deletion or returns an error if the product ID does not exist.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## 📄 View Products
+Endpoint: GET /product
+Description: Retrieves a list of all products.
+Response: Returns an array of products with their details.
+
+## 🔍 Filter Products
+Endpoint: GET /product/filter-by-category
+Description: Filters products by category or quantity range.
+Query Parameters:
+category (optional): Filters products by the specified category.
+
+Endpoint: GET /product/filter-by-quantity-less-than?quantity
+Description: Filters products by category less than
+Query Parameters:
+category (optional): Filters products by the specified category.
+
+Endpoint: GET /product/filter-by-quantity-range
+Description: Filters products by range of quantity
+Query Parameters:
+min : minimum quantity.
+max : maximum quantity.
+
+## Example Request:
+
+GET /product/filter-by-quantity-range?min=2&max=5
+
+## 🧪 Testing Instructions
+To test the API, you can use Postman, cURL, or any API testing tool.
+
+## Add Product:
+
+curl -X POST http://localhost:3000/product -H "Content-Type: application/json" -d '{"name": "Sample Product", "quantity": 10, "category": "Electronics"}'
+
+## Update Product Quantity:
+curl -X PATCH http://localhost:3000/product/1 -H "Content-Type: application/json" -d '{"quantity": 20}'
+
+## Delete Product:
+curl -X DELETE http://localhost:3000/product/1

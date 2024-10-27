@@ -66,6 +66,8 @@ export class ProductService {
       {where: {category}}
     );
   }
+ 
+
   async findByQuantityRange(min: number,max: number): Promise<Product[]>{
     return await this.productRepository.find(
       {where: {
