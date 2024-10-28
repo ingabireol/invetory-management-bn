@@ -19,8 +19,8 @@ Follow these steps to set up and run the project locally.
 ### 1. Clone the Repository
 First, clone the repository to your local machine:
 
-git clone <repository-link>
-cd <repository-name>
+git clone https://github.com/ingabireol/invetory-management-bn.git
+cd invetory-management-bn
 
 ### 2. Install Dependencies
 Install all required dependencies:
@@ -31,11 +31,11 @@ npm install
 ### 3. Database Configuration
 Ensure you have PostgreSQL running. Then, set up environment variables for database connection in a .env file:
 
-DATABASE_HOST=localhost
-DATABASE_PORT=5432
-DATABASE_USERNAME=your-username
-DATABASE_PASSWORD=your-password
-DATABASE_NAME=inventory_db
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=your-username
+DB_PASSWORD=your-password
+DB_NAME=inventory_db
 
 ### 4. Run Migrations
 To set up the necessary tables, run migrations:
